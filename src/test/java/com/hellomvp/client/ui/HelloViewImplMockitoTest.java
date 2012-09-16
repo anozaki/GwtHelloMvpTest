@@ -16,6 +16,7 @@ import com.google.gwt.event.dom.client.ClickEvent;
 import com.googlecode.gwt.test.GwtModule;
 import com.googlecode.gwt.test.GwtTestWithMockito;
 import com.googlecode.gwt.test.utils.GwtReflectionUtils;
+import com.googlecode.gwt.test.utils.events.Browser;
 import com.hellomvp.client.place.GoodbyePlace;
 import com.hellomvp.client.ui.HelloView.Presenter;
 
@@ -36,7 +37,7 @@ public class HelloViewImplMockitoTest extends GwtTestWithMockito {
 		// setInnerText was called and name was saved.
 		// verify(nameSpan).setInnerText(eq(name)); // <-- final method :(
 		// assertEquals(name, Whitebox.getInternalState(view, "name"));
-		
+
 		// gwt-test-util way.
 		assertEquals(name,
 				GwtReflectionUtils.getPrivateFieldValue(view, "name"));
@@ -80,10 +81,42 @@ public class HelloViewImplMockitoTest extends GwtTestWithMockito {
 		view.setPresenter(presenter);
 		view.setName(name);
 		view.onClickGoodbye(event);
-		
+
 		// doesn't do any good testing name if goTo didn't get called.
 		verify(presenter).goTo(any(GoodbyePlace.class));
 
 	}
 
+	@Test
+	public void testGoodbyeClick() {
+		Presenter presenter = mock(Presenter.class);
+
+		final String name = UUID.randomUUID().toString();
+
+		// make sure the param is correct... seems a little hacky to use Answer
+		// but it works.
+		doAnswer(new Answer<Void>() {
+
+			@Override
+			public Void answer(InvocationOnMock invocation) throws Throwable {
+				GoodbyePlace place = (GoodbyePlace) invocation.getArguments()[0];
+				assertEquals(name, place.getGoodbyeName());
+
+				return null;
+			}
+
+		}).when(presenter).goTo(any(GoodbyePlace.class));
+
+		HelloViewImpl view = new HelloViewImpl();
+		view.setPresenter(presenter);
+		view.setName(name);
+
+		Browser.click(view.goodbyeLink);
+		// almost the same test as he onClick but making sure goodbyeLink is
+		// connected properly.
+		// view.onClickGoodbye(event);
+
+		// doesn't do any good testing name if goTo didn't get called.
+		verify(presenter).goTo(any(GoodbyePlace.class));
+	}
 }
