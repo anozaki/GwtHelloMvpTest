@@ -31,10 +31,10 @@ public class GoodbyeActivityMockitoTest extends GwtTestWithMockito {
 	AcceptsOneWidget panel;
 
 	@Mock
-	GoodbyeView view = mock(GoodbyeView.class);
+	GoodbyeView view;
 	
 	@Mock
-	Widget widget = mock(Widget.class);
+	Widget widget;
 	
 	String testName;
 
