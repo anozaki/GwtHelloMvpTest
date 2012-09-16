@@ -1,0 +1,9 @@
+/.classpath
+/.settings
+/.project
+/target
+/src/main/gwt-unitCache
+/src/main/webapp/helloMVP
+/src/main/webapp/WEB-INF/deploy
+.DS_Store
+
