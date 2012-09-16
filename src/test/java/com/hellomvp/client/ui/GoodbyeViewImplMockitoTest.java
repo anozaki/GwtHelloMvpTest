@@ -1,14 +1,11 @@
 package com.hellomvp.client.ui;
 
-import static org.mockito.Matchers.eq;
-import static org.mockito.Mockito.spy;
-import static org.mockito.Mockito.verify;
+import static org.junit.Assert.assertEquals;
 
 import java.util.UUID;
 
 import org.junit.Test;
 
-import com.google.gwt.user.client.Element;
 import com.googlecode.gwt.test.GwtModule;
 import com.googlecode.gwt.test.GwtTestWithMockito;
 
@@ -21,16 +18,17 @@ public class GoodbyeViewImplMockitoTest extends GwtTestWithMockito {
 
 	@Test
 	public void testSetName() {
-		GoodbyeViewImpl view = new GoodbyeViewImpl();
-		Element nameSpan = spy(view.nameSpan);
-
 		String name = UUID.randomUUID().toString();
 
+		GoodbyeViewImpl view = new GoodbyeViewImpl();
 		view.setName(name);
 
 		// final method so it doesn't actually test... PowerMock... hopefully in
 		// future.
 		// verify(nameSpan).setInnerText(eq("Good-bye, " + name));
+		
+		// we can check if get inner text returns the same value.
+		assertEquals("Good-bye, " + name, view.nameSpan.getInnerText());
 	}
 
 }

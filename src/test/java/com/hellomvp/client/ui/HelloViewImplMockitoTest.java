@@ -41,6 +41,7 @@ public class HelloViewImplMockitoTest extends GwtTestWithMockito {
 		// gwt-test-util way.
 		assertEquals(name,
 				GwtReflectionUtils.getPrivateFieldValue(view, "name"));
+		assertEquals(name, view.nameSpan.getInnerText());
 
 	}
 
@@ -54,6 +55,9 @@ public class HelloViewImplMockitoTest extends GwtTestWithMockito {
 		// hopefully gwt-test-util will support power mock... then we can verify
 		// name was saved.
 		// assertEquals(presenter, Whitebox.getInternalState(view, "listener"));
+		
+		assertEquals(presenter, GwtReflectionUtils.getPrivateFieldValue(view, "listener"));
+		
 	}
 
 	@Test
