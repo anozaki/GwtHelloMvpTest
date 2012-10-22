@@ -21,25 +21,16 @@ import com.googlecode.gwt.test.GwtTest;
 @JruRunWith({JruMockitoRunner.class, JruGwtTestUtilRunner.class})
 @JruRunnerFactoryDelegate(JruGwtRunnerFactory.class)
 @GwtModule("com.hellomvp.HelloMVP")
-public class GoodbyeViewImplMockitoTest extends GwtTest {
+public class JruGwtTest extends GwtTest {
+    
+    @Test
+    public void testSetName() {
+        String name = UUID.randomUUID().toString();
 
-	public void testInitialize() {
-		// no way to test constructor... should fix code.
-	}
+        GoodbyeViewImpl view = new GoodbyeViewImpl();
+        view.setName(name);
 
-	@Test
-	public void testSetName() {
-		String name = UUID.randomUUID().toString();
-
-		GoodbyeViewImpl view = new GoodbyeViewImpl();
-		view.setName(name);
-
-		// final method so it doesn't actually test... PowerMock... hopefully in
-		// future.
-		// verify(nameSpan).setInnerText(eq("Good-bye, " + name));
-		
-		// we can check if get inner text returns the same value.
-		assertEquals("Good-bye, " + name, view.nameSpan.getInnerText());
-	}
-
+        // we can check if get inner text returns the same value.
+        assertEquals("Good-bye, " + name, view.nameSpan.getInnerText());
+    }
 }

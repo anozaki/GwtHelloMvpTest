@@ -8,20 +8,31 @@ import static org.mockito.Mockito.verify;
 
 import java.util.UUID;
 
+import net.tanoshi.test.junit.JruJunitRunner;
+import net.tanoshi.test.junit.annotation.JruRunWith;
+import net.tanoshi.test.junit.annotation.JruRunnerFactoryDelegate;
+import net.tanoshi.test.junit.factory.JruGwtRunnerFactory;
+import net.tanoshi.test.junit.runner.JruGwtTestUtilRunner;
+import net.tanoshi.test.junit.runner.JruMockitoRunner;
+
 import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.mockito.invocation.InvocationOnMock;
 import org.mockito.stubbing.Answer;
 
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.googlecode.gwt.test.GwtModule;
-import com.googlecode.gwt.test.GwtTestWithMockito;
+import com.googlecode.gwt.test.GwtTest;
 import com.googlecode.gwt.test.utils.GwtReflectionUtils;
 import com.googlecode.gwt.test.utils.events.Browser;
 import com.hellomvp.client.place.GoodbyePlace;
 import com.hellomvp.client.ui.HelloView.Presenter;
 
+@RunWith(JruJunitRunner.class)
+@JruRunWith({JruMockitoRunner.class, JruGwtTestUtilRunner.class})
+@JruRunnerFactoryDelegate(JruGwtRunnerFactory.class)
 @GwtModule("com.hellomvp.HelloMVP")
-public class HelloViewImplMockitoTest extends GwtTestWithMockito {
+public class HelloViewImplMockitoTest extends GwtTest {
 
 	@Test
 	public void testSetName() {

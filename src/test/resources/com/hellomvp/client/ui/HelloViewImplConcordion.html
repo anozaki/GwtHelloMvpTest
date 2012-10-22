@@ -1,0 +1,25 @@
+<html xmlns:concordion="http://www.concordion.org/2007/concordion">
+<head>
+<title>Hello</title>
+</head>
+<body>
+	<h1>Hello Page</h1>
+
+	<p>This page will simply greet the user when they arrive here with
+		a simple message.</p>
+
+	<h2>Requirements</h2>
+
+	<ul>
+		<li concordion:execute="#greeting = getGreeting(#name)">User will
+			be greeted with a simple message "<span
+			concordion:assertEquals="#greeting">Hello, World!</span>" when the
+			activity gives the name "<span concordion:set="#name">World!</span>".
+		</li>
+		<li>User will be able to navigate to GoodBye page from here.</li>
+		<li>User will be prompted with a message "Please hold on. This
+			activity is stopping." before leaving this page.</li>
+	</ul>
+
+</body>
+</html>
